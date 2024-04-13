@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://sjr53ncjeb33"]
+[gd_scene load_steps=9 format=3 uid="uid://sjr53ncjeb33"]
 
 [ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="1_gci2p"]
 [ext_resource type="Texture2D" uid="uid://cnwgcu8scxj3v" path="res://sprites/tower.png" id="2_6yoa2"]
 [ext_resource type="Script" path="res://Minions.gd" id="2_ksj2c"]
 [ext_resource type="Script" path="res://Enemies.gd" id="2_q43r5"]
 [ext_resource type="Texture2D" uid="uid://otoecseo43i7" path="res://sprites/hut.png" id="3_w56hf"]
+[ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="6_36r04"]
+[ext_resource type="Script" path="res://UI.gd" id="6_ms6yy"]
+[ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="8_qj0y5"]
 
 [node name="Level" type="Node2D"]
 
@@ -24,6 +27,7 @@ script = ExtResource("2_ksj2c")
 position = Vector2(150, 420)
 
 [node name="ImpTimer" type="Timer" parent="Minions"]
+wait_time = 2.0
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource("2_q43r5")
@@ -51,11 +55,40 @@ texture = ExtResource("3_w56hf")
 position = Vector2(994, 381)
 texture = ExtResource("3_w56hf")
 
-[node name="UI" type="ColorRect" parent="."]
-offset_top = 491.0
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 483.0
 offset_right = 1152.0
 offset_bottom = 648.0
+script = ExtResource("6_ms6yy")
+
+[node name="UIBackground" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.294118, 0.294118, 0.294118, 0.780392)
+
+[node name="BoxContainer" type="BoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ImpContainer" type="VBoxContainer" parent="UI/BoxContainer"]
+layout_mode = 2
+
+[node name="ImpButton" type="TextureButton" parent="UI/BoxContainer/ImpContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_36r04")
+texture_disabled = ExtResource("8_qj0y5")
 
 [connection signal="timeout" from="Minions/ImpTimer" to="Minions" method="_on_imp_timer_timeout"]
 [connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_timer_timeout"]
+[connection signal="pressed" from="UI/BoxContainer/ImpContainer/ImpButton" to="UI" method="_on_texture_button_pressed" binds= ["imp"]]

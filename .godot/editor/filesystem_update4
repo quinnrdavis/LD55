@@ -5,3 +5,8 @@ res://pitchfork_villager.gd
 res://imp.tscn
 res://Minions.gd
 res://imp.gd
+res://UI.gd
+res://hitbox.tscn
+res://hurtbox.tscn
+res://character_component.tscn
+res://character.gd
