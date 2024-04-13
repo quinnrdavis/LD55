@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://sjr53ncjeb33"]
+[gd_scene load_steps=6 format=3 uid="uid://sjr53ncjeb33"]
 
 [ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="1_gci2p"]
 [ext_resource type="Texture2D" uid="uid://cnwgcu8scxj3v" path="res://sprites/tower.png" id="2_6yoa2"]
+[ext_resource type="Script" path="res://Minions.gd" id="2_ksj2c"]
+[ext_resource type="Script" path="res://Enemies.gd" id="2_q43r5"]
 [ext_resource type="Texture2D" uid="uid://otoecseo43i7" path="res://sprites/hut.png" id="3_w56hf"]
 
 [node name="Level" type="Node2D"]
@@ -14,6 +16,24 @@ color = Color(0.368627, 0.376471, 0.231373, 1)
 [node name="Path" type="Sprite2D" parent="."]
 position = Vector2(560, 442)
 texture = ExtResource("1_gci2p")
+
+[node name="Minions" type="Node2D" parent="."]
+script = ExtResource("2_ksj2c")
+
+[node name="SpawnPoint" type="Node2D" parent="Minions"]
+position = Vector2(150, 420)
+
+[node name="ImpTimer" type="Timer" parent="Minions"]
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource("2_q43r5")
+
+[node name="Timer" type="Timer" parent="Enemies"]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnPoint" type="Node2D" parent="Enemies"]
+position = Vector2(1010, 420)
 
 [node name="Tower" type="Sprite2D" parent="."]
 position = Vector2(102, 262)
@@ -36,3 +56,6 @@ offset_top = 491.0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.294118, 0.294118, 0.294118, 0.780392)
+
+[connection signal="timeout" from="Minions/ImpTimer" to="Minions" method="_on_imp_timer_timeout"]
+[connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_timer_timeout"]

@@ -1,1 +1,7 @@
 res://level.tscn
+res://Enemies.gd
+res://pitchfork_villager.tscn
+res://pitchfork_villager.gd
+res://imp.tscn
+res://Minions.gd
+res://imp.gd

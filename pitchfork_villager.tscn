@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxy5yjo1qaim8"]
+
+[ext_resource type="Texture2D" uid="uid://mq7tyxbgkuyr" path="res://sprites/forkvillager.png" id="1_ojsfp"]
+[ext_resource type="Script" path="res://pitchfork_villager.gd" id="1_qi03g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no67q"]
+size = Vector2(22, 54)
+
+[node name="PitchforkVillager" type="CharacterBody2D"]
+script = ExtResource("1_qi03g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ojsfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_no67q")
