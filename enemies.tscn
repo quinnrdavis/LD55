@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvsyt3c0ps0ju"]
+
+[ext_resource type="Script" path="res://Enemies.gd" id="1_04oau"]
+[ext_resource type="Texture2D" uid="uid://otoecseo43i7" path="res://sprites/hut.png" id="2_arnag"]
+[ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="3_f70jf"]
+[ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="4_1twmn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmlgu"]
+size = Vector2(1149, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mubbm"]
+size = Vector2(20, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnx38"]
+size = Vector2(20, 96)
+
+[node name="Enemies" type="Node2D"]
+script = ExtResource("1_04oau")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(536, 494)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(39.5, 0)
+shape = SubResource("RectangleShape2D_nmlgu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(1010, 420)
+
+[node name="Hut" type="Sprite2D" parent="."]
+position = Vector2(1014, 261)
+texture = ExtResource("2_arnag")
+
+[node name="Hut2" type="Sprite2D" parent="."]
+position = Vector2(1092, 314)
+texture = ExtResource("2_arnag")
+
+[node name="Hut3" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(994, 381)
+texture = ExtResource("2_arnag")
+
+[node name="VillageHealthBar" type="TextureProgressBar" parent="."]
+offset_left = 1111.0
+offset_top = 64.0
+offset_right = 1143.0
+offset_bottom = 464.0
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("3_f70jf")
+texture_progress = ExtResource("4_1twmn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(955, 410)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mubbm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(955, 410)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_wnx38")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

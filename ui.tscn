@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfgctcmo6e5rb"]
+
+[ext_resource type="Script" path="res://UI.gd" id="1_4w4fw"]
+[ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="2_0jj1j"]
+[ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="3_0tn4m"]
+[ext_resource type="Texture2D" uid="uid://b5j7u8ns4elw2" path="res://sprites/ape.png" id="4_ek0is"]
+[ext_resource type="Texture2D" uid="uid://i50ypnfddg55" path="res://sprites/apedisabled.png" id="5_n6ry2"]
+
+[sub_resource type="SystemFont" id="SystemFont_3pvk1"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 483.0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_4w4fw")
+
+[node name="UIBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.294118, 0.294118, 0.294118, 0.780392)
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ImpContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="ImpButton" type="TextureButton" parent="BoxContainer/ImpContainer"]
+layout_mode = 2
+tooltip_text = "Spawn Imp
+1 Damage
+3 HP
+1 Speed"
+texture_normal = ExtResource("2_0jj1j")
+texture_disabled = ExtResource("3_0tn4m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="ApeButton" type="TextureButton" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_ek0is")
+texture_disabled = ExtResource("5_n6ry2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 1034.0
+offset_right = 1152.0
+offset_bottom = 165.0
+alignment = 2
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_3pvk1")
+theme_override_font_sizes/font_size = 27
+text = "Quit"
+
+[connection signal="pressed" from="BoxContainer/ImpContainer/ImpButton" to="." method="_on_imp_button_pressed" binds= ["imp"]]
+[connection signal="pressed" from="BoxContainer/VBoxContainer/ApeButton" to="." method="_on_ape_button_pressed" binds= ["ape"]]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_button_pressed"]

@@ -1,12 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxy5yjo1qaim8"]
+[gd_scene load_steps=10 format=3 uid="uid://dwipx04f773dw"]
 
-[ext_resource type="Texture2D" uid="uid://mq7tyxbgkuyr" path="res://sprites/forkvillager.png" id="1_ojsfp"]
-[ext_resource type="PackedScene" uid="uid://bkl7k3q7mbgeu" path="res://character_component.tscn" id="1_phv4s"]
+[ext_resource type="PackedScene" uid="uid://bkl7k3q7mbgeu" path="res://character_component.tscn" id="1_w6vjg"]
+[ext_resource type="Texture2D" uid="uid://b5j7u8ns4elw2" path="res://sprites/ape.png" id="2_3v63c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxq0g"]
-size = Vector2(28, 54)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_345mg"]
+size = Vector2(37, 50)
 
-[sub_resource type="Animation" id="Animation_hg1y4"]
+[sub_resource type="Animation" id="Animation_wekbh"]
 resource_name = "Attack"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(0, 0)]
+"values": [Vector2(0, 8), Vector2(-5, 8), Vector2(5, 8), Vector2(0, 8)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -30,7 +30,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.7, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, -0.261799, -0.261799, 0.0]
+"values": [0.0, 0.0, 0.261799, 0.261799, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -45,7 +45,7 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_wuhd2"]
+[sub_resource type="Animation" id="Animation_t64bl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,7 +57,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, 8)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -72,51 +72,72 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xrwl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqjcr"]
 _data = {
-"Attack": SubResource("Animation_hg1y4"),
-"RESET": SubResource("Animation_wuhd2")
+"Attack": SubResource("Animation_wekbh"),
+"RESET": SubResource("Animation_t64bl")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4mbg"]
-size = Vector2(63, 23)
+size = Vector2(59, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dymli"]
-size = Vector2(12, 54)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj34h"]
+size = Vector2(15, 50)
 
-[node name="PitchforkVillager" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 85
+[sub_resource type="Curve" id="Curve_euohu"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 3.89224, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[node name="CharacterComponent" parent="." instance=ExtResource("1_phv4s")]
-SPEED = -1
+[node name="Ape" type="CharacterBody2D"]
+collision_mask = 149
+
+[node name="CharacterComponent" parent="." instance=ExtResource("1_w6vjg")]
+MAX_HEALTH = 5
+DAMAGE = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ojsfp")
+position = Vector2(0, 8)
+texture = ExtResource("2_3v63c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 9)
-shape = SubResource("RectangleShape2D_uxq0g")
+position = Vector2(8.5, 17)
+shape = SubResource("RectangleShape2D_345mg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5xrwl")
+"": SubResource("AnimationLibrary_sqjcr")
 }
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 65
+position = Vector2(0, 19)
+collision_layer = 2
+collision_mask = 132
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-19.5, 0.5)
+position = Vector2(38.5, -12)
 shape = SubResource("RectangleShape2D_j4mbg")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 4
+position = Vector2(0, 19)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-4, 9)
-shape = SubResource("RectangleShape2D_dymli")
+position = Vector2(19.5, -2)
+shape = SubResource("RectangleShape2D_rj34h")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(18, 6)
+amount = 20
+lifetime = 0.25
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 6.07
+gravity = Vector2(0, -400)
+scale_amount_min = 0.2
+color = Color(0.6, 0.898039, 0.313726, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_euohu")
 
 [connection signal="area_entered" from="Hitbox" to="CharacterComponent" method="_on_hitbox_area_entered"]

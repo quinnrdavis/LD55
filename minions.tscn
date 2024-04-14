@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://kw5q8tfp803v"]
+
+[ext_resource type="Script" path="res://Minions.gd" id="1_skohi"]
+[ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="2_avdci"]
+[ext_resource type="Texture2D" uid="uid://cnwgcu8scxj3v" path="res://sprites/tower.png" id="2_soksy"]
+[ext_resource type="Texture2D" uid="uid://r2kmchd3it1y" path="res://sprites/wand.png" id="3_4omi0"]
+[ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="3_mci4r"]
+[ext_resource type="Script" path="res://Wand.gd" id="4_iv8le"]
+[ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="4_y20tl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wxlh"]
+size = Vector2(20, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aj5p2"]
+size = Vector2(20, 97)
+
+[node name="Minions" type="Node2D"]
+script = ExtResource("1_skohi")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.368627, 0.376471, 0.231373, 1)
+
+[node name="Path" type="Sprite2D" parent="."]
+position = Vector2(560, 442)
+texture = ExtResource("2_avdci")
+
+[node name="Wand" type="Sprite2D" parent="."]
+position = Vector2(177, 94.6563)
+rotation = 0.361283
+texture = ExtResource("3_4omi0")
+centered = false
+offset = Vector2(-14, -51)
+script = ExtResource("4_iv8le")
+
+[node name="SpawnPoint" type="Node2D" parent="Wand"]
+position = Vector2(14.5989, -40.7415)
+
+[node name="FireballTimer" type="Timer" parent="Wand"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(195, 414)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6wxlh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(195, 414)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_aj5p2")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(175, 422)
+
+[node name="ImpTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ApeTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="Tower" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(130, 260.656)
+texture = ExtResource("2_soksy")
+
+[node name="TowerHealthBar" type="TextureProgressBar" parent="Tower"]
+offset_left = -123.0
+offset_top = -196.0
+offset_right = -91.0
+offset_bottom = 204.0
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("3_mci4r")
+texture_progress = ExtResource("4_y20tl")
+
+[connection signal="timeout" from="Wand/FireballTimer" to="Wand" method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="ImpTimer" to="." method="_on_imp_timer_timeout"]
+[connection signal="timeout" from="ApeTimer" to="." method="_on_ape_timer_timeout"]

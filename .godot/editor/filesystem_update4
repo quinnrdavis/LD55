@@ -13,3 +13,7 @@ res://character.gd
 res://Wand.gd
 res://fireball.tscn
 res://fireball.gd
+res://ui.tscn
+res://enemies.tscn
+res://minions.tscn
+res://ape.tscn
