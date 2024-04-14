@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var animation_player = $"../AnimationPlayer"
 @onready var hitbox = $"../Hitbox"
+@onready var health_bar = $Control/HealthBar
 @onready var parent = get_parent()
 
 
@@ -24,6 +25,9 @@ func take_damage(damage):
 	health -= damage
 	if health <= 0:
 		parent.queue_free()
+	health_bar.max_value = MAX_HEALTH
+	health_bar.value = health
+	health_bar.visible = true
 
 
 func _on_hitbox_area_entered(area):
@@ -31,5 +35,5 @@ func _on_hitbox_area_entered(area):
 	animation_player.play("Attack")
 	
 	await animation_player.animation_finished
-	if is_instance_valid(area):
+	if is_instance_valid(area) && is_instance_valid(parent):
 		area.get_parent().get_child(0).take_damage(DAMAGE)

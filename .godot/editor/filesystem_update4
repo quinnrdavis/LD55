@@ -10,3 +10,6 @@ res://hitbox.tscn
 res://hurtbox.tscn
 res://character_component.tscn
 res://character.gd
+res://Wand.gd
+res://fireball.tscn
+res://fireball.gd

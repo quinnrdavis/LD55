@@ -1,17 +1,22 @@
 extends Node2D
 
+@export var TOWER_HEALTH = 50
+
+var health
+var imp_ready = true
+
 @onready var spawnPoint = $SpawnPoint
 @onready var imp_timer = $ImpTimer
 @onready var imp = preload("res://imp.tscn")
-
 @onready var ui = $"../UI"
+@onready var tower_health_bar = $"../Minions/Tower/TowerHealthBar"
 
-
-
-var imp_ready = true
 
 func _ready():
 	ui.connect("spawn_minion", spawn_minion)
+	health = TOWER_HEALTH
+	tower_health_bar.max_value = TOWER_HEALTH
+	tower_health_bar.value = health
 
 func _process(delta):
 	pass

@@ -1,13 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://sjr53ncjeb33"]
+[gd_scene load_steps=14 format=3 uid="uid://sjr53ncjeb33"]
 
 [ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="1_gci2p"]
 [ext_resource type="Texture2D" uid="uid://cnwgcu8scxj3v" path="res://sprites/tower.png" id="2_6yoa2"]
 [ext_resource type="Script" path="res://Minions.gd" id="2_ksj2c"]
 [ext_resource type="Script" path="res://Enemies.gd" id="2_q43r5"]
+[ext_resource type="Texture2D" uid="uid://r2kmchd3it1y" path="res://sprites/wand.png" id="2_syaqg"]
+[ext_resource type="Script" path="res://Wand.gd" id="3_qlqfc"]
 [ext_resource type="Texture2D" uid="uid://otoecseo43i7" path="res://sprites/hut.png" id="3_w56hf"]
 [ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="6_36r04"]
 [ext_resource type="Script" path="res://UI.gd" id="6_ms6yy"]
+[ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="7_luyvq"]
+[ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="8_2t4cj"]
 [ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="8_qj0y5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmlgu"]
+size = Vector2(1149, 20)
 
 [node name="Level" type="Node2D"]
 
@@ -20,14 +27,43 @@ color = Color(0.368627, 0.376471, 0.231373, 1)
 position = Vector2(560, 442)
 texture = ExtResource("1_gci2p")
 
+[node name="Wand" type="Sprite2D" parent="."]
+position = Vector2(177, 94.6563)
+rotation = 0.361283
+texture = ExtResource("2_syaqg")
+centered = false
+offset = Vector2(-14, -51)
+script = ExtResource("3_qlqfc")
+
+[node name="SpawnPoint" type="Node2D" parent="Wand"]
+position = Vector2(14.5989, -40.7415)
+
+[node name="FireballTimer" type="Timer" parent="Wand"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Minions" type="Node2D" parent="."]
 script = ExtResource("2_ksj2c")
 
 [node name="SpawnPoint" type="Node2D" parent="Minions"]
-position = Vector2(150, 420)
+position = Vector2(175, 422)
 
 [node name="ImpTimer" type="Timer" parent="Minions"]
 wait_time = 2.0
+
+[node name="Tower" type="Sprite2D" parent="Minions"]
+position = Vector2(130, 260.656)
+texture = ExtResource("2_6yoa2")
+
+[node name="TowerHealthBar" type="TextureProgressBar" parent="Minions/Tower"]
+offset_left = -123.0
+offset_top = -196.0
+offset_right = -91.0
+offset_bottom = 204.0
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("7_luyvq")
+texture_progress = ExtResource("8_2t4cj")
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource("2_q43r5")
@@ -39,21 +75,36 @@ autostart = true
 [node name="SpawnPoint" type="Node2D" parent="Enemies"]
 position = Vector2(1010, 420)
 
-[node name="Tower" type="Sprite2D" parent="."]
-position = Vector2(102, 262)
-texture = ExtResource("2_6yoa2")
-
-[node name="Hut" type="Sprite2D" parent="."]
+[node name="Hut" type="Sprite2D" parent="Enemies"]
 position = Vector2(1014, 261)
 texture = ExtResource("3_w56hf")
 
-[node name="Hut2" type="Sprite2D" parent="."]
+[node name="Hut2" type="Sprite2D" parent="Enemies"]
 position = Vector2(1092, 314)
 texture = ExtResource("3_w56hf")
+
+[node name="VillageHealthBar" type="TextureProgressBar" parent="Enemies"]
+offset_left = 1111.0
+offset_top = 64.0
+offset_right = 1143.0
+offset_bottom = 464.0
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("7_luyvq")
+texture_progress = ExtResource("8_2t4cj")
 
 [node name="Hut3" type="Sprite2D" parent="."]
 position = Vector2(994, 381)
 texture = ExtResource("3_w56hf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(536, 494)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(39.5, 0)
+shape = SubResource("RectangleShape2D_nmlgu")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -89,6 +140,7 @@ layout_mode = 2
 texture_normal = ExtResource("6_36r04")
 texture_disabled = ExtResource("8_qj0y5")
 
+[connection signal="timeout" from="Wand/FireballTimer" to="Wand" method="_on_fireball_timer_timeout"]
 [connection signal="timeout" from="Minions/ImpTimer" to="Minions" method="_on_imp_timer_timeout"]
 [connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_timer_timeout"]
 [connection signal="pressed" from="UI/BoxContainer/ImpContainer/ImpButton" to="UI" method="_on_texture_button_pressed" binds= ["imp"]]
