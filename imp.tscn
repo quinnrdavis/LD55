@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5u6u3rqv0ih5"]
+[gd_scene load_steps=10 format=3 uid="uid://c5u6u3rqv0ih5"]
 
 [ext_resource type="PackedScene" uid="uid://bkl7k3q7mbgeu" path="res://character_component.tscn" id="1_ecbnx"]
 [ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="1_j155s"]
@@ -84,8 +84,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hypcl"]
 size = Vector2(9, 46)
 
+[sub_resource type="Curve" id="Curve_ardme"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, -6.58142, 0, 0, Vector2(1, 1), 6.98555, 0.0, 0, 0]
+point_count = 2
+
 [node name="Imp" type="CharacterBody2D"]
-collision_mask = 21
+collision_mask = 149
 
 [node name="CharacterComponent" parent="." instance=ExtResource("1_ecbnx")]
 
@@ -105,7 +110,7 @@ libraries = {
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(13, 8)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 132
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_ifbs3")
@@ -116,5 +121,31 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(8.5, 16)
 shape = SubResource("RectangleShape2D_hypcl")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-4, 8)
+lifetime = 0.25
+lifetime_randomness = 0.46
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+gravity = Vector2(0, -200)
+scale_amount_min = 0.1
+color = Color(0.6, 0.898039, 0.313726, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_ardme")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(5, 9)
+lifetime = 0.25
+lifetime_randomness = 0.46
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+gravity = Vector2(0, -200)
+scale_amount_min = 0.1
+color = Color(0.6, 0.898039, 0.313726, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_ardme")
 
 [connection signal="area_entered" from="Hitbox" to="CharacterComponent" method="_on_hitbox_area_entered"]

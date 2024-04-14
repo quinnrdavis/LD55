@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sjr53ncjeb33"]
+[gd_scene load_steps=18 format=3 uid="uid://sjr53ncjeb33"]
 
 [ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="1_gci2p"]
 [ext_resource type="Texture2D" uid="uid://cnwgcu8scxj3v" path="res://sprites/tower.png" id="2_6yoa2"]
@@ -12,6 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="7_luyvq"]
 [ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="8_2t4cj"]
 [ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="8_qj0y5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wxlh"]
+size = Vector2(20, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aj5p2"]
+size = Vector2(20, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mubbm"]
+size = Vector2(20, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnx38"]
+size = Vector2(20, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmlgu"]
 size = Vector2(1149, 20)
@@ -44,6 +56,22 @@ one_shot = true
 
 [node name="Minions" type="Node2D" parent="."]
 script = ExtResource("2_ksj2c")
+
+[node name="Area2D" type="Area2D" parent="Minions"]
+position = Vector2(195, 414)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minions/Area2D"]
+shape = SubResource("RectangleShape2D_6wxlh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Minions"]
+position = Vector2(195, 414)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minions/StaticBody2D"]
+shape = SubResource("RectangleShape2D_aj5p2")
 
 [node name="SpawnPoint" type="Node2D" parent="Minions"]
 position = Vector2(175, 422)
@@ -92,6 +120,22 @@ value = 50.0
 fill_mode = 3
 texture_under = ExtResource("7_luyvq")
 texture_progress = ExtResource("8_2t4cj")
+
+[node name="Area2D" type="Area2D" parent="Enemies"]
+position = Vector2(955, 410)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Area2D"]
+shape = SubResource("RectangleShape2D_mubbm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Enemies"]
+position = Vector2(955, 410)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/StaticBody2D"]
+shape = SubResource("RectangleShape2D_wnx38")
 
 [node name="Hut3" type="Sprite2D" parent="."]
 position = Vector2(994, 381)

@@ -36,4 +36,7 @@ func _on_hitbox_area_entered(area):
 	
 	await animation_player.animation_finished
 	if is_instance_valid(area) && is_instance_valid(parent):
-		area.get_parent().get_child(0).take_damage(DAMAGE)
+		if area.get_parent().name.contains("Minions") or area.get_parent().name.contains("Enemies"):
+			area.get_parent().take_damage(DAMAGE)
+		else:
+			area.get_parent().get_child(0).take_damage(DAMAGE)

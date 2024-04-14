@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bkl7k3q7mbgeu" path="res://character_component.tscn" id="1_phv4s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxq0g"]
-size = Vector2(33, 54)
+size = Vector2(28, 54)
 
 [sub_resource type="Animation" id="Animation_hg1y4"]
 resource_name = "Attack"
@@ -79,14 +79,14 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4mbg"]
-size = Vector2(49, 20)
+size = Vector2(53, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dymli"]
 size = Vector2(12, 54)
 
 [node name="PitchforkVillager" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 21
+collision_mask = 85
 
 [node name="CharacterComponent" parent="." instance=ExtResource("1_phv4s")]
 SPEED = -1
@@ -95,7 +95,7 @@ SPEED = -1
 texture = ExtResource("1_ojsfp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6.5, 9)
+position = Vector2(4, 9)
 shape = SubResource("RectangleShape2D_uxq0g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -105,15 +105,15 @@ libraries = {
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 49
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-14.5, 0)
+position = Vector2(-16.5, 0)
 shape = SubResource("RectangleShape2D_j4mbg")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 48
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-4, 9)

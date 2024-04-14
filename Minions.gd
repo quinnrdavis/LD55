@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var TOWER_HEALTH = 50
+@export var TOWER_HEALTH = 40
 
 var health
 var imp_ready = true
@@ -28,6 +28,10 @@ func spawn_minion(minion):
 		var impInstance = imp.instantiate()
 		add_child(impInstance)
 		impInstance.global_position = spawnPoint.global_position
+
+func take_damage(damage):
+	health -= damage
+	tower_health_bar.value = health
 
 func _on_imp_timer_timeout():
 	imp_ready = true

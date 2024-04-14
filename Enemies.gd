@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var VILLAGE_HEALTH = 50
+@export var VILLAGE_HEALTH = 25
 
 var health
 
@@ -11,6 +11,10 @@ var health
 func _ready():
 	health = VILLAGE_HEALTH
 	village_health_bar.max_value = VILLAGE_HEALTH
+	village_health_bar.value = health
+
+func take_damage(damage):
+	health -= damage
 	village_health_bar.value = health
 
 func _on_timer_timeout():
