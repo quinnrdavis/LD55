@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://cviqjaxk0jms4"]
+
+[ext_resource type="Script" path="res://levels.gd" id="1_3tyuu"]
+[ext_resource type="Texture2D" uid="uid://fm75su1uc5ww" path="res://sprites/1.png" id="1_whhfo"]
+[ext_resource type="Texture2D" uid="uid://drqxb1imcl2c3" path="res://sprites/1highlight.png" id="2_eujd2"]
+[ext_resource type="Texture2D" uid="uid://b8pkd8yywobf7" path="res://sprites/2.png" id="3_si5kx"]
+[ext_resource type="Texture2D" uid="uid://dab2rowifr61w" path="res://sprites/2highlight.png" id="4_x3080"]
+[ext_resource type="Texture2D" uid="uid://clbhdoimeynmy" path="res://sprites/3.png" id="5_wsfas"]
+[ext_resource type="Texture2D" uid="uid://dkn11656uhw6s" path="res://sprites/3highlight.png" id="6_twtpn"]
+[ext_resource type="Texture2D" uid="uid://dqltwd6xt5y1a" path="res://sprites/4.png" id="7_knab4"]
+[ext_resource type="Texture2D" uid="uid://cq3nxkwlmu3pv" path="res://sprites/4highlight.png" id="8_xfj6r"]
+[ext_resource type="Texture2D" uid="uid://dllrjeydvwuvf" path="res://sprites/5.png" id="9_n4r6w"]
+[ext_resource type="Texture2D" uid="uid://bovwsv8oqsj3i" path="res://sprites/5highlight.png" id="10_52e4e"]
+
+[node name="Levels" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3tyuu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.172549, 0.0941176, 1)
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelOneButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_whhfo")
+texture_hover = ExtResource("2_eujd2")
+
+[node name="LevelTwoButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_si5kx")
+texture_hover = ExtResource("4_x3080")
+
+[node name="LevelThreeButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_wsfas")
+texture_hover = ExtResource("6_twtpn")
+
+[node name="LevelFourButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_knab4")
+texture_hover = ExtResource("8_xfj6r")
+
+[node name="LevelFiveButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_n4r6w")
+texture_hover = ExtResource("10_52e4e")
+
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/LevelOneButton" to="." method="_on_level_one_button_pressed"]

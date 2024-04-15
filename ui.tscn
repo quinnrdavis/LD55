@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfgctcmo6e5rb"]
+[gd_scene load_steps=10 format=3 uid="uid://bfgctcmo6e5rb"]
 
 [ext_resource type="Script" path="res://UI.gd" id="1_4w4fw"]
 [ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="2_0jj1j"]
 [ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="3_0tn4m"]
+[ext_resource type="Texture2D" uid="uid://cn8fkegbws2pa" path="res://sprites/imphighlight.png" id="3_7xjh6"]
 [ext_resource type="Texture2D" uid="uid://b5j7u8ns4elw2" path="res://sprites/ape.png" id="4_ek0is"]
 [ext_resource type="Texture2D" uid="uid://i50ypnfddg55" path="res://sprites/apedisabled.png" id="5_n6ry2"]
-
-[sub_resource type="SystemFont" id="SystemFont_3pvk1"]
+[ext_resource type="Texture2D" uid="uid://dsjcfge4io1tc" path="res://sprites/apehighlight.png" id="6_5gesa"]
+[ext_resource type="Texture2D" uid="uid://co7v7wfvd6o3c" path="res://sprites/mainmenu.png" id="8_u5ukc"]
+[ext_resource type="Texture2D" uid="uid://c3dak6ehx8iqh" path="res://sprites/mainmenuhighlight.png" id="9_kth4i"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -42,8 +44,10 @@ layout_mode = 2
 tooltip_text = "Spawn Imp
 1 Damage
 3 HP
-1 Speed"
+1 Speed
+2 Cooldown"
 texture_normal = ExtResource("2_0jj1j")
+texture_hover = ExtResource("3_7xjh6")
 texture_disabled = ExtResource("3_0tn4m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
@@ -51,22 +55,27 @@ layout_mode = 2
 
 [node name="ApeButton" type="TextureButton" parent="BoxContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Spawn Ape
+2 Damage
+5 HP
+1 Speed
+4 Cooldown"
 texture_normal = ExtResource("4_ek0is")
+texture_hover = ExtResource("6_5gesa")
 texture_disabled = ExtResource("5_n6ry2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 1034.0
+offset_left = 1024.0
 offset_right = 1152.0
 offset_bottom = 165.0
 alignment = 2
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="MenuButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_3pvk1")
-theme_override_font_sizes/font_size = 27
-text = "Quit"
+texture_normal = ExtResource("8_u5ukc")
+texture_hover = ExtResource("9_kth4i")
 
 [connection signal="pressed" from="BoxContainer/ImpContainer/ImpButton" to="." method="_on_imp_button_pressed" binds= ["imp"]]
 [connection signal="pressed" from="BoxContainer/VBoxContainer/ApeButton" to="." method="_on_ape_button_pressed" binds= ["ape"]]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

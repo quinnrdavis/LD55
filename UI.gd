@@ -18,14 +18,12 @@ func _process(delta):
 		ape_button.disabled = false
 
 
-
-
-func _on_button_pressed():
-	get_tree().quit()
-
-
 func _on_ape_button_pressed(button):
 	spawn_minion.emit(button)
 
 func _on_imp_button_pressed(button):
 	spawn_minion.emit(button)
+
+
+func _on_menu_button_pressed():
+	get_tree().change_scene_to_file("res://main_menu.tscn")

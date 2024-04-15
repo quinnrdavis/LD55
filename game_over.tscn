@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://choouyv12cuv3"]
+
+[ext_resource type="Texture2D" uid="uid://cotxfnfxdep8u" path="res://sprites/gameover.png" id="1_0quhp"]
+[ext_resource type="Script" path="res://game_over.gd" id="1_2uvto"]
+[ext_resource type="Texture2D" uid="uid://cqdukxlfgb81a" path="res://sprites/retry.png" id="2_ck8re"]
+[ext_resource type="Texture2D" uid="uid://t2wwqcnoq6ap" path="res://sprites/retryhighlight.png" id="3_exggt"]
+[ext_resource type="Texture2D" uid="uid://b0ftx0on5uwr6" path="res://sprites/mainmenularger.png" id="4_37v8c"]
+[ext_resource type="Texture2D" uid="uid://b67ejlt8s0ddf" path="res://sprites/mainmenulargerhighlight.png" id="5_oy7p0"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2uvto")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.172549, 0.0941176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_0quhp")
+
+[node name="RetryButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_ck8re")
+texture_hover = ExtResource("3_exggt")
+stretch_mode = 3
+
+[node name="MainMenuButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_37v8c")
+texture_hover = ExtResource("5_oy7p0")
+stretch_mode = 3
+
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

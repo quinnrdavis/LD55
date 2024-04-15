@@ -17,3 +17,10 @@ res://ui.tscn
 res://enemies.tscn
 res://minions.tscn
 res://ape.tscn
+res://main_menu.tscn
+res://main_menu.gd
+res://levels.tscn
+res://levels.gd
+res://level1.tscn
+res://game_over.gd
+res://game_over.tscn
