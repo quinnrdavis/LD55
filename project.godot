@@ -15,14 +15,19 @@ run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [layer_names]
 
 2d_physics/layer_1="minions"
-2d_physics/layer_2="minion hitboxes"
+2d_physics/layer_2="minion hurtboxes"
 2d_physics/layer_3="villagers"
-2d_physics/layer_4="villager hitboxes"
+2d_physics/layer_4="villager hurtboxes"
 2d_physics/layer_5="ground"
 2d_physics/layer_6="fireball"
+2d_physics/main_scene="res://main_menu.tscn"
 
 [rendering]
 

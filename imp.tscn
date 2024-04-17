@@ -93,6 +93,8 @@ point_count = 2
 collision_mask = 149
 
 [node name="CharacterComponent" parent="." instance=ExtResource("1_ecbnx")]
+SPEED = 2
+DAMAGE = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 14)
@@ -109,13 +111,14 @@ libraries = {
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(13, 8)
-collision_layer = 2
-collision_mask = 132
+collision_layer = 0
+collision_mask = 140
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_ifbs3")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

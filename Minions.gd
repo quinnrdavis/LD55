@@ -13,6 +13,8 @@ var ape_ready = true
 @onready var ape = preload("res://ape.tscn")
 @onready var ui = $"../UI"
 @onready var tower_health_bar = $"../Minions/Tower/TowerHealthBar"
+@onready var hit_sound = $HitSound
+
 
 
 func _ready():
@@ -42,8 +44,14 @@ func spawn_minion(minion):
 				apeInstance.global_position = spawnPoint.global_position
 
 func take_damage(damage):
+	hit_sound.play()
 	health -= damage
 	tower_health_bar.value = health
+	if health <= 0:
+		game_over()
+
+func game_over():
+	get_tree().change_scene_to_file("res://game_over.tscn")
 
 func _on_imp_timer_timeout():
 	imp_ready = true

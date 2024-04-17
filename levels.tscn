@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cviqjaxk0jms4"]
+[gd_scene load_steps=13 format=3 uid="uid://cviqjaxk0jms4"]
 
 [ext_resource type="Script" path="res://levels.gd" id="1_3tyuu"]
 [ext_resource type="Texture2D" uid="uid://fm75su1uc5ww" path="res://sprites/1.png" id="1_whhfo"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cq3nxkwlmu3pv" path="res://sprites/4highlight.png" id="8_xfj6r"]
 [ext_resource type="Texture2D" uid="uid://dllrjeydvwuvf" path="res://sprites/5.png" id="9_n4r6w"]
 [ext_resource type="Texture2D" uid="uid://bovwsv8oqsj3i" path="res://sprites/5highlight.png" id="10_52e4e"]
+[ext_resource type="Texture2D" uid="uid://c6d5almcl8alj" path="res://sprites/checkmark.png" id="12_jii31"]
 
 [node name="Levels" type="Control"]
 layout_mode = 3
@@ -30,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.168627, 0.172549, 0.0941176, 1)
 
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,33 +40,66 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="LevelOneButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+[node name="LevelOneButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_whhfo")
 texture_hover = ExtResource("2_eujd2")
 
-[node name="LevelTwoButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+[node name="LevelTwoButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_si5kx")
 texture_hover = ExtResource("4_x3080")
 
-[node name="LevelThreeButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+[node name="LevelThreeButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_wsfas")
 texture_hover = ExtResource("6_twtpn")
 
-[node name="LevelFourButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+[node name="LevelFourButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("7_knab4")
 texture_hover = ExtResource("8_xfj6r")
 
-[node name="LevelFiveButton" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
+[node name="LevelFiveButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("9_n4r6w")
 texture_hover = ExtResource("10_52e4e")
 
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/LevelOneButton" to="." method="_on_level_one_button_pressed"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Checkmark1" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("12_jii31")
+
+[node name="Checkmark2" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("12_jii31")
+
+[node name="Checkmark3" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("12_jii31")
+
+[node name="Checkmark4" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("12_jii31")
+
+[node name="Checkmark5" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("12_jii31")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LevelOneButton" to="." method="_on_level_one_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LevelTwoButton" to="." method="_on_level_two_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LevelThreeButton" to="." method="_on_level_three_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LevelFourButton" to="." method="_on_level_four_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LevelFiveButton" to="." method="_on_level_five_button_pressed"]

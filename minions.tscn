@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://kw5q8tfp803v"]
+[gd_scene load_steps=11 format=3 uid="uid://kw5q8tfp803v"]
 
 [ext_resource type="Script" path="res://Minions.gd" id="1_skohi"]
 [ext_resource type="Texture2D" uid="uid://bpewnddba6n1t" path="res://sprites/path.png" id="2_avdci"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="3_mci4r"]
 [ext_resource type="Script" path="res://Wand.gd" id="4_iv8le"]
 [ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="4_y20tl"]
+[ext_resource type="AudioStream" uid="uid://b84ykdo4dr4xb" path="res://sounds/player_hit.wav" id="8_aoays"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wxlh"]
 size = Vector2(20, 96)
@@ -41,6 +42,10 @@ position = Vector2(14.5989, -40.7415)
 wait_time = 0.5
 one_shot = true
 
+[node name="IceTimer" type="Timer" parent="Wand"]
+wait_time = 6.0
+one_shot = true
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(195, 414)
 collision_layer = 64
@@ -61,11 +66,11 @@ shape = SubResource("RectangleShape2D_aj5p2")
 position = Vector2(175, 422)
 
 [node name="ImpTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="ApeTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Tower" type="Sprite2D" parent="."]
@@ -83,6 +88,10 @@ fill_mode = 3
 texture_under = ExtResource("3_mci4r")
 texture_progress = ExtResource("4_y20tl")
 
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_aoays")
+
 [connection signal="timeout" from="Wand/FireballTimer" to="Wand" method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="Wand/IceTimer" to="Wand" method="_on_ice_timer_timeout"]
 [connection signal="timeout" from="ImpTimer" to="." method="_on_imp_timer_timeout"]
 [connection signal="timeout" from="ApeTimer" to="." method="_on_ape_timer_timeout"]

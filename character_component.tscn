@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkl7k3q7mbgeu"]
+[gd_scene load_steps=5 format=3 uid="uid://bkl7k3q7mbgeu"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_cmapa"]
 [ext_resource type="Texture2D" uid="uid://c7yt7bnm4kad5" path="res://sprites/healthbarunder.png" id="2_h0r34"]
 [ext_resource type="Texture2D" uid="uid://dtxn23ief2c2c" path="res://sprites/healthbarprogress.png" id="3_aies6"]
+[ext_resource type="AudioStream" uid="uid://c0342x56iqw1q" path="res://sounds/hit.wav" id="4_q4wds"]
 
 [node name="CharacterComponent" type="Node2D"]
 script = ExtResource("1_cmapa")
@@ -28,3 +29,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_under = ExtResource("2_h0r34")
 texture_progress = ExtResource("3_aies6")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q4wds")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://brg2xol2668e7"]
+
+[ext_resource type="Script" path="res://level5.gd" id="1_kmicw"]
+[ext_resource type="PackedScene" uid="uid://kw5q8tfp803v" path="res://minions.tscn" id="2_tyx5f"]
+[ext_resource type="PackedScene" uid="uid://bvsyt3c0ps0ju" path="res://enemies.tscn" id="3_28nmm"]
+[ext_resource type="PackedScene" uid="uid://bfgctcmo6e5rb" path="res://ui.tscn" id="4_oieyn"]
+
+[node name="Level5" type="Node2D"]
+script = ExtResource("1_kmicw")
+
+[node name="Minions" parent="." instance=ExtResource("2_tyx5f")]
+
+[node name="Enemies" parent="." instance=ExtResource("3_28nmm")]
+
+[node name="UI" parent="." instance=ExtResource("4_oieyn")]
+
+[editable path="UI"]

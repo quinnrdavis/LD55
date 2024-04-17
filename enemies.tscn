@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvsyt3c0ps0ju"]
+[gd_scene load_steps=9 format=3 uid="uid://bvsyt3c0ps0ju"]
 
 [ext_resource type="Script" path="res://Enemies.gd" id="1_04oau"]
 [ext_resource type="Texture2D" uid="uid://otoecseo43i7" path="res://sprites/hut.png" id="2_arnag"]
 [ext_resource type="Texture2D" uid="uid://c1d5i3ihfupvk" path="res://sprites/basehealthbarunder.png" id="3_f70jf"]
 [ext_resource type="Texture2D" uid="uid://8rm3yf2fu330" path="res://sprites/basehealthbarprogress.png" id="4_1twmn"]
+[ext_resource type="AudioStream" uid="uid://c0342x56iqw1q" path="res://sounds/hit.wav" id="5_hlysc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmlgu"]
 size = Vector2(1149, 20)
@@ -26,9 +27,9 @@ collision_mask = 0
 position = Vector2(39.5, 0)
 shape = SubResource("RectangleShape2D_nmlgu")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
+one_shot = true
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(1010, 420)
@@ -72,4 +73,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_wnx38")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hlysc")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://khexv8ven5ub"]
+
+[ext_resource type="Script" path="res://ice_effect.gd" id="1_1p5x8"]
+[ext_resource type="Texture2D" uid="uid://boos0mntcurbo" path="res://sprites/ice.png" id="1_5cdwx"]
+[ext_resource type="AudioStream" uid="uid://dt5e1n3dltjpk" path="res://sounds/ice.wav" id="3_n5cdi"]
+
+[sub_resource type="Curve" id="Curve_kpdqo"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, -3.74775, 0, 0, Vector2(0.415301, -0.318681), 0.0, 0.0, 0, 0, Vector2(1, 0.846154), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="IceEffect" type="Node2D"]
+script = ExtResource("1_1p5x8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5cdwx")
+
+[node name="IceDuration" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 40
+lifetime = 0.5
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(24, 24)
+gravity = Vector2(0, -300)
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+color = Color(0.27451, 0.678431, 0.760784, 1)
+hue_variation_min = -0.37
+hue_variation_max = 0.13
+hue_variation_curve = SubResource("Curve_kpdqo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n5cdi")
+autoplay = true
+
+[connection signal="timeout" from="IceDuration" to="." method="_on_ice_duration_timeout"]

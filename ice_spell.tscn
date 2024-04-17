@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu210hb2dq55p"]
+
+[ext_resource type="Script" path="res://ice_spell.gd" id="1_03ugi"]
+[ext_resource type="Texture2D" uid="uid://cdex5lg2ph5n7" path="res://sprites/icearea.png" id="1_h067r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr1fe"]
+radius = 96.0
+
+[node name="IceSpell" type="Area2D"]
+collision_layer = 0
+collision_mask = 12
+monitoring = false
+script = ExtResource("1_03ugi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qr1fe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_h067r")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

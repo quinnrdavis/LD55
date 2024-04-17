@@ -1,14 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfgctcmo6e5rb"]
+[gd_scene load_steps=18 format=3 uid="uid://bfgctcmo6e5rb"]
 
 [ext_resource type="Script" path="res://UI.gd" id="1_4w4fw"]
 [ext_resource type="Texture2D" uid="uid://4miay6gcrvli" path="res://sprites/imp.png" id="2_0jj1j"]
 [ext_resource type="Texture2D" uid="uid://b5q72s2fyyr82" path="res://sprites/imp_disabled.png" id="3_0tn4m"]
 [ext_resource type="Texture2D" uid="uid://cn8fkegbws2pa" path="res://sprites/imphighlight.png" id="3_7xjh6"]
+[ext_resource type="Texture2D" uid="uid://dliq13mtwu1rs" path="res://sprites/fireballbutton.png" id="4_1ks1h"]
+[ext_resource type="Texture2D" uid="uid://doymmil8mxrlq" path="res://sprites/spellselection.png" id="4_dve35"]
 [ext_resource type="Texture2D" uid="uid://b5j7u8ns4elw2" path="res://sprites/ape.png" id="4_ek0is"]
+[ext_resource type="Texture2D" uid="uid://cpf2veabx0i7g" path="res://sprites/fireballbuttonhighlight.png" id="5_2b58n"]
+[ext_resource type="Texture2D" uid="uid://boos0mntcurbo" path="res://sprites/ice.png" id="5_kk4jg"]
 [ext_resource type="Texture2D" uid="uid://i50ypnfddg55" path="res://sprites/apedisabled.png" id="5_n6ry2"]
 [ext_resource type="Texture2D" uid="uid://dsjcfge4io1tc" path="res://sprites/apehighlight.png" id="6_5gesa"]
+[ext_resource type="Texture2D" uid="uid://cudkx3jrbscns" path="res://sprites/icehighlight.png" id="6_ltodd"]
+[ext_resource type="Texture2D" uid="uid://b4mp5iecxwbj2" path="res://sprites/icedisabled.png" id="7_jfrom"]
 [ext_resource type="Texture2D" uid="uid://co7v7wfvd6o3c" path="res://sprites/mainmenu.png" id="8_u5ukc"]
 [ext_resource type="Texture2D" uid="uid://c3dak6ehx8iqh" path="res://sprites/mainmenuhighlight.png" id="9_kth4i"]
+
+[sub_resource type="Curve" id="Curve_1xp38"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 1.48962, 0, 0, Vector2(0.994536, 1), -0.211684, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qeqev"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, -3.74775, 0, 0, Vector2(0.415301, -0.318681), 0.0, 0.0, 0, 0, Vector2(1, 0.846154), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -27,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.294118, 0.294118, 0.294118, 0.780392)
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="BoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,11 +51,78 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+alignment = 1
 
-[node name="ImpContainer" type="VBoxContainer" parent="BoxContainer"]
+[node name="SpellsContainer" type="HBoxContainer" parent="BoxContainer"]
 layout_mode = 2
 
-[node name="ImpButton" type="TextureButton" parent="BoxContainer/ImpContainer"]
+[node name="FireballContainer" type="VBoxContainer" parent="BoxContainer/SpellsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FireballButton" type="TextureButton" parent="BoxContainer/SpellsContainer/FireballContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_1ks1h")
+texture_hover = ExtResource("5_2b58n")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="BoxContainer/SpellsContainer/FireballContainer/FireballButton"]
+position = Vector2(31, 32)
+amount = 80
+lifetime = 0.5
+lifetime_randomness = 0.8
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector2(0, -480)
+angle_max = 90.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+color = Color(0.94902, 0.235294, 0.0862745, 1)
+hue_variation_min = -1.0
+hue_variation_max = -0.8
+hue_variation_curve = SubResource("Curve_1xp38")
+
+[node name="FireballSelection" type="TextureRect" parent="BoxContainer/SpellsContainer/FireballContainer"]
+layout_mode = 2
+texture = ExtResource("4_dve35")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/SpellsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="IceButton" type="TextureButton" parent="BoxContainer/SpellsContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_kk4jg")
+texture_hover = ExtResource("6_ltodd")
+texture_disabled = ExtResource("7_jfrom")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="BoxContainer/SpellsContainer/VBoxContainer/IceButton"]
+position = Vector2(34, 38)
+amount = 40
+lifetime = 0.5
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(24, 24)
+gravity = Vector2(0, -300)
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+color = Color(0.27451, 0.678431, 0.760784, 1)
+hue_variation_min = -0.37
+hue_variation_max = 0.13
+hue_variation_curve = SubResource("Curve_qeqev")
+
+[node name="IceSelection" type="TextureRect" parent="BoxContainer/SpellsContainer/VBoxContainer"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("4_dve35")
+
+[node name="MinionsContainer" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="ImpContainer" type="VBoxContainer" parent="BoxContainer/MinionsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ImpButton" type="TextureButton" parent="BoxContainer/MinionsContainer/ImpContainer"]
 layout_mode = 2
 tooltip_text = "Spawn Imp
 1 Damage
@@ -50,10 +133,11 @@ texture_normal = ExtResource("2_0jj1j")
 texture_hover = ExtResource("3_7xjh6")
 texture_disabled = ExtResource("3_0tn4m")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+[node name="ApeContainer" type="VBoxContainer" parent="BoxContainer/MinionsContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="ApeButton" type="TextureButton" parent="BoxContainer/VBoxContainer"]
+[node name="ApeButton" type="TextureButton" parent="BoxContainer/MinionsContainer/ApeContainer"]
 layout_mode = 2
 tooltip_text = "Spawn Ape
 2 Damage
@@ -69,13 +153,15 @@ layout_mode = 2
 offset_left = 1024.0
 offset_right = 1152.0
 offset_bottom = 165.0
-alignment = 2
+alignment = 1
 
 [node name="MenuButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("8_u5ukc")
 texture_hover = ExtResource("9_kth4i")
 
-[connection signal="pressed" from="BoxContainer/ImpContainer/ImpButton" to="." method="_on_imp_button_pressed" binds= ["imp"]]
-[connection signal="pressed" from="BoxContainer/VBoxContainer/ApeButton" to="." method="_on_ape_button_pressed" binds= ["ape"]]
+[connection signal="pressed" from="BoxContainer/SpellsContainer/FireballContainer/FireballButton" to="." method="_on_fireball_button_pressed"]
+[connection signal="pressed" from="BoxContainer/SpellsContainer/VBoxContainer/IceButton" to="." method="_on_ice_button_pressed"]
+[connection signal="pressed" from="BoxContainer/MinionsContainer/ImpContainer/ImpButton" to="." method="_on_imp_button_pressed" binds= ["imp"]]
+[connection signal="pressed" from="BoxContainer/MinionsContainer/ApeContainer/ApeButton" to="." method="_on_ape_button_pressed" binds= ["ape"]]
 [connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
